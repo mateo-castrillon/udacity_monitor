@@ -253,7 +253,8 @@ string LinuxParser::Ram(int pid) {
     while (std::getline(filestream, line)) {
       std::istringstream linestream(line);
       while (linestream >> key >> value) {
-        if (key == "VmSize:")
+        // using VmRSS instrad VmSize because it gives the exact physical memory being used as part of physical RAM
+        if (key == "VmRSS:")
           return value;
       }
     }

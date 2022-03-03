@@ -47,8 +47,18 @@ string Process::User() const {
 }
 
 // Return the age of this process (in seconds)
+// TODO from reviewer:
+/*You need to subtract this value from LinuxParser::UpTime() as the time which
+ * you are returning is the time the process started after system boot.
+ * So, In order to calculate the process uptime you will need to subtract this
+ * value from the system uptime which is given by the function LinuxParser::UpTime()!
+ * */
+
+// reviewer request show different values as in htop, the TIME+ is always constant on htop... WHY??
+
 long int Process::UpTime() const {
-  return LinuxParser::UpTime(Pid());
+  //return LinuxParser::UpTime(Pid());
+  return LinuxParser::UpTime() - LinuxParser::UpTime(Pid());
 }
 
 // Overload the "less than" comparison operator for Process objects
